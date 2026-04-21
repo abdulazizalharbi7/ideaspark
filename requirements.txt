@@ -4,3 +4,8 @@ supabase
 fpdf2
 arabic-reshaper
 python-bidi
+groq
+streamlit
+supabase
+langchain-groq
+langchain-core

@@ -1,0 +1,6 @@
+groq
+streamlit
+supabase
+fpdf2
+arabic-reshaper
+python-bidi

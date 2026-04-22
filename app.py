@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 from supabase import create_client
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -112,6 +113,18 @@ else:
                 tech_str = "، ".join(tech_pref) if tech_pref else "أي تقنية"
                 result = smart_generate(interest, major, level, goal, time_available, team_size, project_type, tech_str, difficulty)
                 st.session_state.last_result = result
+
+                # إرسال لـ n8n تلقائياً
+                try:
+                    requests.post(
+                        "https://sendou7.app.n8n.cloud/webhook/my-webhook",
+                        json={
+                            "email": st.session_state.user.email,
+                            "ideas": result
+                        }
+                    )
+                except:
+                    pass
 
                 try:
                     supabase.table("ideas").insert({
